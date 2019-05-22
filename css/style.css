@@ -1,0 +1,10 @@
+body {
+    max-width:350px;
+    height:75px;
+}
+.popupContainer {
+    border:1px solid #efefef;
+}
+.border {
+    border:1px solid #efefef;
+}

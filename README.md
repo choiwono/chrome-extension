@@ -1,2 +1,5 @@
-# chrome-extension
-pouch 프로젝트용 크롬 익스텐션
+# chrome_extension_boilerplate
+A boilerplate for building chrome extension with HTML, CSS, JS (included, jQuery, Bootstrap)
+
+If you want to learn how to setup use/install this boilerplate then then follow this simple instructional content :)
+https://www.maketecheasier.com/create-chrome-extension/
