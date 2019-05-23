@@ -12,6 +12,8 @@
         "http://15.164.26.183:3000/**",
         "http://localhost:3000/",
         "http://localhost:3000/api/**",
-        "tabs"
+        "tabs",
+        "https://cdn.fontawesome.com:443/",
+        "https://cdn.fontawesome.com/**"
     ]
 }

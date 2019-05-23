@@ -4,11 +4,12 @@ $('body').css('width', `${screen.width/2.5}`);
 
 $(document).ready(function() {
     getAuth();
-    $("#save").click(saveUrl);   
+    $("#save").click(saveUrl);
+    $("#home").click(moveUrl);
+    $("#addCategory").click(moveUrl);  
 });
 
-//const api_url = 'http://15.164.26.183:3000/';
-const api_url = 'http://localhost:3000/';
+const api_url = 'http://15.164.26.183:3000/';
 const api_crawling = 'api/crawling/save';
 
 function getAuth(){
@@ -37,45 +38,36 @@ function getCategories(email){
     })
 }
 
+function moveUrl(){
+    window.open("http://15.164.26.183:3000",'_blank');
+}
+
 function saveUrl(){
 
     let recentUrl = '';
     let categoryId = $('#select-category option:selected').val();
-    chrome.tabs.query({active: true,lastFocusedWindow: true}, ((tabs)=>{
-        let tab = tabs[0];
-        recentUrl = tab.url;
-        $.ajax({
-            url : api_url+api_crawling,
-            type : 'POST',
-            data : {
-                "url" : recentUrl,
-                "categoryId" : categoryId
-            },
-            dataType: "text",
-            success : ((data)=> {
-                $("#title").html("완료");
-            }),
-            error : ((data)=> {
-                $("#title").html("실패");
-            }),
-        })
-    }))
+    if(categoryId === ""){
+        $("#title").html("<span class='replace-text'>카테고리를 선택해주세요</span>");
+    } else {
+        chrome.tabs.query({active: true,lastFocusedWindow: true}, ((tabs)=>{
+            let tab = tabs[0];
+            recentUrl = tab.url;
+            $.ajax({
+                url : api_url+api_crawling,
+                type : 'POST',
+                data : {
+                    "url" : recentUrl,
+                    "categoryId" : categoryId
+                },
+                dataType: "text",
+                success : ((data)=> {
+                    $("#title").html("<span class='replace-text'>저장되었습니다<span class='replace-text'>");
+                }),
+                error : ((data)=> {
+                    $("#title").html("<span class='replace-text'>http, https로 시작하는 url만 가능합니다<span class='replace-text'>");
+                }),
+            })
+        }))
+    }
 }
-
-/*function showLoadingBar() { 
-    var maskHeight = $(document).height(); 
-    var maskWidth = window.document.body.clientWidth; 
-    var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>"; 
-    var loadingImg = ''; 
-    loadingImg += "<div id='loadingImg' style='position:absolute; left:50%; top:40%; display:none; z-index:10000;'>"; 
-    loadingImg += " <img src='loading.gif'/>"; 
-    loadingImg += "</div>"; $('body').append(mask).append(loadingImg); 
-    $('#mask').css({ 'width' : maskWidth , 'height': maskHeight , 'opacity' : '0.3' }); 
-    $('#mask').show(); $('#loadingImg').show(); 
-}
-
-function hideLoadingBar() { 
-    $('#mask, #loadingImg').hide(); 
-    $('#mask, #loadingImg').remove(); 
-}*/
 
