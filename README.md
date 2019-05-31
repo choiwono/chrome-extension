@@ -1,5 +1,6 @@
-# chrome_extension_boilerplate
-A boilerplate for building chrome extension with HTML, CSS, JS (included, jQuery, Bootstrap)
+# 크롬 익스텐션
 
-If you want to learn how to setup use/install this boilerplate then then follow this simple instructional content :)
-https://www.maketecheasier.com/create-chrome-extension/
+익스텐션을 통해서 간단한게 URL을 저장하는 기능을 구현.
+
+현재, 로그인이 되어있지 않은 경우 사이트에 연결. 로그인 이후에 
+
